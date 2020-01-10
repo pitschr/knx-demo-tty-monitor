@@ -22,7 +22,7 @@ It includes three plugins:
 
 #### Arguments
 
-| <span style="width: 200px">Name</span> | <span style="width: 100px">Default Value</span> | Description |
+| <div style="width:180px">Name</div> | <div style="width:120px">Default Value</div> | Description |
 | ---- | ------------- | ----------- |
 | `-t <number>` <br> `--time <number>` | `3600` (=1 hour) | The time in seconds how the KNX monitor should run. |
 | `-p <path>` <br> `--knxproj <path>` | _latest *.knxproj in the folder_ | The path to _*.knxproj file_ that is created by the ETS to encode the values in correct data point types. In case there are more than one _*.knxproj_ in the working directory, the most recent _*.knxproj file_ (based on timestamp) will be taken. <br><br> If no _*.knxproj file_ is provided then all values are displayed in raw bytes |
