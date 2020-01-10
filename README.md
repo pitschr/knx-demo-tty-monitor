@@ -22,10 +22,10 @@ It includes three plugins:
 
 #### Arguments
 
-| Name | Default Value | Description |
+| Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Default Value &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description |
 | ---- | ------------- | ----------- |
 | `-t <number>` <br> `--time <number>` | `3600` (=1 hour) | The time in seconds how the KNX monitor should run. |
-| `-p <file path>` <br> `--knxproj <file path>` | _latest *.knxproj in the folder_ | The path to _*.knxproj file_ that is created by the ETS to encode the values in correct data point types. In case there are more than one _*.knxproj_ in the working directory, the most recent _*.knxproj file_ (based on timestamp) will be taken. <br><br> If no _*.knxproj file_ is provided then all values are displayed in raw bytes |
+| `-p <path>` <br> `--knxproj <path>` | _latest *.knxproj in the folder_ | The path to _*.knxproj file_ that is created by the ETS to encode the values in correct data point types. In case there are more than one _*.knxproj_ in the working directory, the most recent _*.knxproj file_ (based on timestamp) will be taken. <br><br> If no _*.knxproj file_ is provided then all values are displayed in raw bytes |
 | `-g` <br> `--generate-fake-data` | `false` | Indicates if the fake data should be generated for demo purposes |
 
 #### Examples
