@@ -134,15 +134,13 @@ public class Main {
                     // add small delay in re-connect in case of an issue
                     if (++attempts < maxAttempts) {
                         log.warn("Re-Connecting ...");
-                        System.out.println("reconnecting");
-                        //Sleeper.seconds(5);
+                        Sleeper.seconds(5);
                     }
                 }
 
                 // quit this loop if max attempts exceeded or if time is overdue
             } while (attempts < maxAttempts && !isOverdue(sw, monitorTime));
         } finally {
-            System.out.println("quit");
             log.debug("===================================================================================");
             log.debug("STOP MONITORING after {} attempts: {}", attempts, toHumanTimeFormat(sw.elapsed(TimeUnit.SECONDS)));
             log.debug("===================================================================================");
