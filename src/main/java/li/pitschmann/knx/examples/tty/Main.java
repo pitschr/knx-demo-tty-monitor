@@ -82,8 +82,8 @@ public class Main {
 
         // Get XML Project Path
         // -p ~/my-project.knxproj
-        // --knxproj ~/my-project.knxproj
-        final var projectPath = getParameterValue(args, "-p,--knxproj", Paths::get, null);
+        // --project ~/my-project.knxproj
+        final var projectPath = getParameterValue(args, "-p,--project", Paths::get, null);
         log.debug("KNX Project Path: {}", Objects.requireNonNullElse(projectPath, "<empty>"));
 
         // If fake data should be generated for demo purposes (checks only if argument is present)

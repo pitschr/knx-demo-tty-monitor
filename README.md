@@ -25,7 +25,7 @@ It includes three plugins:
 | Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Default&nbsp;Value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description |
 | ---- | ------------- | ----------- |
 | `-t <number>` <br> `--time <number>` | `3600` (=1 hour) | The time in seconds how the KNX monitor should run. |
-| `-p <path>` <br> `--knxproj <path>` | _latest *.knxproj in the folder_ | The path to _*.knxproj file_ that is created by the ETS to encode the values in correct data point types. In case there are more than one _*.knxproj_ in the working directory, the most recent _*.knxproj file_ (based on timestamp) will be taken. <br><br> If no _*.knxproj file_ is provided then all values are displayed in raw bytes |
+| `-p <path>` <br> `--project <path>` | _latest *.knxproj in the folder_ | The path to _*.knxproj file_ that is created by the ETS to encode the values in correct data point types. In case there are more than one _*.knxproj_ in the working directory, the most recent _*.knxproj file_ (based on timestamp) will be taken. <br><br> If no _*.knxproj file_ is provided then all values are displayed in raw bytes |
 | `-g` <br> `--generate-fake-data` | `false` | Indicates if the fake data should be generated for demo purposes |
 
 #### Examples
@@ -47,7 +47,13 @@ java -jar knx-demo-tty-monitor.jar --routing
 
 # Tunneling (auto-discovery) and limited to 5 minutes
 java -jar knx-demo-tty-monitor.jar -t 300
+java -jar knx-demo-tty-monitor.jar --time 300
 
-# Tunneling (auto-discovery) with specific KNXPROJ file located at ~/my-house.knxproj
+# Tunneling (auto-discovery) with specific *.knxproj file located at ~/my-house.knxproj
 java -jar knx-demo-tty-monitor.jar -p ~/my-house.knxproj
+java -jar knx-demo-tty-monitor.jar --project ~/my-house.knxproj
+
+# Tunneling (auto-discovery) with generating fake data
+java -jar knx-demo-tty-monitor.jar -g
+java -jar knx-demo-tty-monitor.jar --generate-fake-data
 ```
