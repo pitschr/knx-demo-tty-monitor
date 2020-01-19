@@ -57,3 +57,16 @@ java -jar knx-demo-tty-monitor.jar --project ~/my-house.knxproj
 java -jar knx-demo-tty-monitor.jar -g
 java -jar knx-demo-tty-monitor.jar --generate-fake-data
 ```
+## Demo
+
+*Talk is cheap, demo it!* I launched the KNX monitor using auto-discovery with a `*.knxproj` 
+in the same working directory:
+```
+java -jar knx-demo-tty-monitor.jar
+```
+![demo-knx-monitor-knxproj](./assets/demo-knx-monitor-knxproj.gif)
+
+In case the data point type of group address is not known in the KNX project file created 
+by ETS the values are displayed in raw data format, see highlighted rows.
+
+![demo-knx-monitor-not-known-ga](./assets/demo-knx-monitor-not-known-ga.png)
