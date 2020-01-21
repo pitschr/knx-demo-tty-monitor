@@ -74,16 +74,50 @@ by ETS the values are displayed in raw data format, see highlighted rows.
 
 ## Now I want to try out it by myself
 
-You're lucky! I have created a ready-to-use docker image for you. 
+#### Linux
+
+You're lucky! I have created a ready-to-use docker image for you.
 
 1. Just pull & run the docker image using:
     * The `--network host` is required because UDP communication doesn't work with docker's default network setting
     ```
     docker run --rm -it --network host --name knx-demo-tty-monitor pitschr/knx-demo-tty-monitor
     ```
-1. Then you can launch with one of the command above. Example: 
+1. Launch with e.g.
     ```
     java -jar knx-demo-tty-monitor.jar
+    java -jar knx-demo-tty-monitor.jar --nat
+    java -jar knx-demo-tty-monitor.jar --routing
     ```
 1. To stop the KNX monitor application just press `CTRL` + `C` and if you want to quit 
 the docker container just enter `exit` in the terminal.
+
+Alternatively, you can also launch the KNX monitor using [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file.
+
+#### MacOS
+
+On Mac (and Windows) the docker is running on a virtual machine and there is a known 
+limitation for UDP and requires NAT. This means: Auto-discovery, Routing and Tunneling 
+without NAT are not possible at the moment with docker and Mac (and Windows). 
+However, you may the test application with tunneling and NAT only:
+```
+java -jar knx-demo-tty-monitor.jar --ip <enter-ip-address> --nat
+```
+
+For full capability it is better to execute the KNX monitor using MacOS terminal which 
+gives you the possibility to try out auto-discovery, routing, etc.
+
+1. Download the [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file.
+1. Open your *Terminal* and go to the folder where you saved the `knx-demo-tty-monitor.jar` file
+1. Launch with e.g.  
+    ```
+    java -jar knx-demo-tty-monitor.jar
+    java -jar knx-demo-tty-monitor.jar --nat
+    java -jar knx-demo-tty-monitor.jar --routing
+    ```
+
+#### Windows
+
+The demo application is designed for terminal which recognize ANSI escape sequences.
+This is not enabled for Windows prompt per default. You may try out the
+*Windows Subsystem for Linux* and follow the same steps like MacOS.
