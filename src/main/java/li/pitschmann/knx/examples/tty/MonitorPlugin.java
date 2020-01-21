@@ -124,7 +124,7 @@ public final class MonitorPlugin implements ObserverPlugin, ExtensionPlugin {
      */
     @Nullable
     private static String getTerminalOutput(final String command) {
-        final var pb = new ProcessBuilder().command("bash", "-c", command + " 2> /dev/tty");
+        final var pb = new ProcessBuilder().command("sh", "-c", command + " 2> /dev/tty");
         try {
             final var process = pb.start();
             try (final var in = new BufferedReader(new InputStreamReader(process.getInputStream()))) {

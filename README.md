@@ -57,6 +57,7 @@ java -jar knx-demo-tty-monitor.jar --project ~/my-house.knxproj
 java -jar knx-demo-tty-monitor.jar -g
 java -jar knx-demo-tty-monitor.jar --generate-fake-data
 ```
+
 ## Demo
 
 *Talk is cheap, demo it!* I launched the KNX monitor using auto-discovery with a `*.knxproj` 
@@ -70,3 +71,19 @@ In case the data point type of group address is not known in the KNX project fil
 by ETS the values are displayed in raw data format, see highlighted rows.
 
 ![demo-knx-monitor-not-known-ga](./assets/demo-knx-monitor-not-known-ga.png)
+
+## Now I want to try out it by myself
+
+You're lucky! I have created a ready-to-use docker image for you. 
+
+1. Just pull & run the docker image using:
+    * The `--network host` is required because UDP communication doesn't work with docker's default network setting
+    ```
+    docker run --rm -it --network host --name knx-demo-tty-monitor pitschr/knx-demo-tty-monitor
+    ```
+1. Then you can launch with one of the command above. Example: 
+    ```
+    java -jar knx-demo-tty-monitor.jar
+    ```
+1. To stop the KNX monitor application just press `CTRL` + `C` and if you want to quit 
+the docker container just enter `exit` in the terminal.
