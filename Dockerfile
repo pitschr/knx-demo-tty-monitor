@@ -2,7 +2,7 @@
 # Build stage
 #
 FROM maven:3.6.3-jdk-11-slim AS build
-COPY src /tmp/build
+COPY src /tmp/build/src
 COPY pom.xml /tmp/build
 RUN mvn -f /tmp/build/pom.xml clean package
 
