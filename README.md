@@ -130,11 +130,11 @@ the KNX Net/IP device using IP Address and NAT.
 ##### Option 3: Start KNX monitor without container platform
 
 Alternatively, you can also launch the KNX monitor using [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file:
-    ```
-    java -jar knx-demo-tty-monitor.jar
-    java -jar knx-demo-tty-monitor.jar --nat
-    java -jar knx-demo-tty-monitor.jar --routing
-    ```
+```
+java -jar knx-demo-tty-monitor.jar
+java -jar knx-demo-tty-monitor.jar --nat
+java -jar knx-demo-tty-monitor.jar --routing
+```
 
 ### MacOS
 
