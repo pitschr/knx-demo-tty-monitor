@@ -98,7 +98,7 @@ Here an example for *firewalld* (via `firewall-cmd`):
 1. Pull & run the image using:
     * The `--net host` is required because UDP multicast doesn't work without additional configurations
     ```
-    podman run --rm -it --name knx-demo-tty-monitor --net host pitschr/knx-demo-tty-monitor
+    podman run --rm -it --name knx-demo-tty-monitor --net host docker.io/pitschr/knx-demo-tty-monitor
     ```
 1. Launch with e.g.
     ```
