@@ -18,4 +18,8 @@ RUN apk add ncurses
 # add fake symbol as alpine has no /bin/bash
 RUN ln -s /bin/sh /bin/bash
 # copy the build package
-COPY --from=build /tmp/build/target/knx-demo-tty-monitor.jar /knx-demo-tty-monitor.jar
+COPY --from=build /tmp/build/target/knx-demo-tty-monitor.jar /app/knx-demo-tty-monitor.jar
+# set volume for KNXPROJ file
+VOLUME . /app
+# define /app as working directory
+WORKDIR /app
