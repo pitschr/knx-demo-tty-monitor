@@ -74,27 +74,28 @@ by ETS the values are displayed in raw data format, see highlighted rows.
 
 ## Now I want to try out it by myself
 
-#### Linux
+### Linux
 
 You're lucky! I have created a ready-to-use container image for you. On my machine I am using 
 the [podman](https://podman.io/), but you can also use the docker; in this case just replace the command `podman` with the `docker`
 
 (Only if necessary) If you are using firewall then either disable it or configure it. 
 Here an example for *firewalld* (via `firewall-cmd`):
-    ```
-    # Create KNX service for firewalld
-    firewall-cmd --permanent --new-service=knx
-    firewall-cmd --permanent --service=knx --set-description="KNXnet/IP is a part of KNX standard for transmission of KNX telegrams via Ethernet"
-    firewall-cmd --permanent --service=knx --set-short=KNX
-    firewall-cmd --permanent --service=knx --add-port=3671/udp
-    # Ports 40001-40003 are necessary only when you want to communicate without NAT
-    firewall-cmd --permanent --service=knx --add-port=40001-40003/udp
-    ```
-    then add it to firewalld:
-    ```
-    firewall-cmd --reload
-    firewall-cmd --permanent --add-service=knx   # Remove --permanent if you want to add the KNX service temporarily only
-    ```
+
+```
+# Create KNX service for firewalld
+firewall-cmd --permanent --new-service=knx
+firewall-cmd --permanent --service=knx --set-description="KNXnet/IP is a part of KNX standard for transmission of KNX telegrams via Ethernet"
+firewall-cmd --permanent --service=knx --set-short=KNX
+firewall-cmd --permanent --service=knx --add-port=3671/udp
+# Ports 40001-40003 are necessary only when you want to communicate without NAT
+firewall-cmd --permanent --service=knx --add-port=40001-40003/udp
+```
+then add it to firewalld:
+```
+firewall-cmd --reload
+firewall-cmd --permanent --add-service=knx   # Remove --permanent if you want to add the KNX service temporarily only
+```
     
 ##### Option 1: Container with host networking
 
@@ -130,7 +131,7 @@ the KNX Net/IP device using IP Address and NAT.
 
 Alternatively, you can also launch the KNX monitor using [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file.
 
-#### MacOS
+### MacOS
 
 On Mac (and Windows) the docker is running on a virtual machine and there is a known 
 limitation for UDP and requires NAT. This means: Auto-discovery, Routing and Tunneling 
@@ -152,7 +153,7 @@ gives you the possibility to try out auto-discovery, routing, etc.
     java -jar knx-demo-tty-monitor.jar --routing
     ```
 
-#### Windows
+### Windows
 
 The demo application is designed for terminal which recognize ANSI escape sequences.
 This is not enabled for Windows prompt per default. You may try out the
