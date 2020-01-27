@@ -79,7 +79,7 @@ by ETS the values are displayed in raw data format, see highlighted rows.
 You're lucky! I have created a ready-to-use container image for you. On my machine I am using 
 the [podman](https://podman.io/), but you can also use the docker; in this case just replace the command `podman` with the `docker`
 
-1. (if necessary) If you are using firewall then either disable it or configure it. 
+(Only if necessary) If you are using firewall then either disable it or configure it. 
 Here an example for *firewalld* (via `firewall-cmd`):
     ```
     # Create KNX service for firewalld
@@ -95,10 +95,12 @@ Here an example for *firewalld* (via `firewall-cmd`):
     firewall-cmd --reload
     firewall-cmd --permanent --add-service=knx   # Remove --permanent if you want to add the KNX service temporarily only
     ```
+    
+##### Option 1: Container with host networking
+
 1. Pull & run the image using:
-    * The `--net host` is required because UDP multicast doesn't work without additional configurations
     ```
-    podman run --rm -it --name knx-demo-tty-monitor --net host docker.io/pitschr/knx-demo-tty-monitor
+    podman run --rm -it --net host docker.io/pitschr/knx-demo-tty-monitor
     ```
 1. Launch with e.g.
     ```
@@ -108,6 +110,23 @@ Here an example for *firewalld* (via `firewall-cmd`):
     ```
 1. To stop the KNX monitor application just press `CTRL` + `C` and if you want to quit 
 the docker container just enter `exit` in the terminal.
+
+##### Option 2: Container without host networking (use bridge) 
+
+There are some limitations when using container, which brings a better isolation, but 
+also some limitations in e.g. UDP multicasting. With this approach you need to connect
+the KNX Net/IP device using IP Address and NAT.
+
+1. Pull & run the image using:
+    ```
+    podman run --rm -it docker.io/pitschr/knx-demo-tty-monitor
+    ```
+1. Launch with e.g.
+    ```
+    java -jar knx-demo-tty-monitor.jar --ip 192.168.1.16 --nat
+    ```
+
+##### Option 3: Start KNX monitor without container platform
 
 Alternatively, you can also launch the KNX monitor using [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file.
 
