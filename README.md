@@ -76,12 +76,29 @@ by ETS the values are displayed in raw data format, see highlighted rows.
 
 #### Linux
 
-You're lucky! I have created a ready-to-use docker image for you.
+You're lucky! I have created a ready-to-use container image for you. On my machine I am using 
+the [podman](https://podman.io/), but you can also use the docker; in this case just replace the command `podman` with the `docker`
 
-1. Just pull & run the docker image using:
-    * The `--network host` is required because UDP communication doesn't work with docker's default network setting
+1. (if necessary) If you are using firewall then either disable it or configure it. 
+Here an example for *firewalld* (via `firewall-cmd`):
     ```
-    docker run --rm -it --network host --name knx-demo-tty-monitor pitschr/knx-demo-tty-monitor
+    # Create KNX service for firewalld
+    firewall-cmd --permanent --new-service=knx
+    firewall-cmd --permanent --service=knx --set-description="KNXnet/IP is a part of KNX standard for transmission of KNX telegrams via Ethernet"
+    firewall-cmd --permanent --service=knx --set-short=KNX
+    firewall-cmd --permanent --service=knx --add-port=3671/udp
+    # Ports 40001-40003 are necessary only when you want to communicate without NAT
+    firewall-cmd --permanent --service=knx --add-port=40001-40003/udp
+    ```
+    then add it to firewalld:
+    ```
+    firewall-cmd --reload
+    firewall-cmd --permanent --add-service=knx   # Remove --permanent if you want to add the KNX service temporarily only
+    ```
+1. Pull & run the image using:
+    * The `--net host` is required because UDP communication doesn't work with docker's default network setting
+    ```
+    podman run --rm -it --name knx-demo-tty-monitor --net host pitschr/knx-demo-tty-monitor
     ```
 1. Launch with e.g.
     ```
