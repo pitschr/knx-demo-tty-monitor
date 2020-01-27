@@ -96,7 +96,7 @@ Here an example for *firewalld* (via `firewall-cmd`):
     firewall-cmd --permanent --add-service=knx   # Remove --permanent if you want to add the KNX service temporarily only
     ```
 1. Pull & run the image using:
-    * The `--net host` is required because UDP communication doesn't work with docker's default network setting
+    * The `--net host` is required because UDP multicast doesn't work without additional configurations
     ```
     podman run --rm -it --name knx-demo-tty-monitor --net host pitschr/knx-demo-tty-monitor
     ```
