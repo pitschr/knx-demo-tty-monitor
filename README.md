@@ -91,10 +91,10 @@ firewall-cmd --permanent --service=knx --add-port=3671/udp
 # Ports 40001-40003 are necessary only when you want to communicate without NAT
 firewall-cmd --permanent --service=knx --add-port=40001-40003/udp
 ```
-then add it to firewalld:
+then add it to firewalld (remove `--permanent` if you want to add the KNX service temporarily only)
 ```
 firewall-cmd --reload
-firewall-cmd --permanent --add-service=knx   # Remove --permanent if you want to add the KNX service temporarily only
+firewall-cmd --permanent --add-service=knx
 ```
     
 ##### Option 1: Container with host networking
@@ -103,15 +103,17 @@ firewall-cmd --permanent --add-service=knx   # Remove --permanent if you want to
     ```
     podman run --rm -it --net host docker.io/pitschr/knx-demo-tty-monitor
     ```
-1. Launch with e.g.
-    ```
-    java -jar knx-demo-tty-monitor.jar
-    java -jar knx-demo-tty-monitor.jar --nat
-    java -jar knx-demo-tty-monitor.jar --routing
-    ```
+1. You should see a menu with several options like, select one:
+   ![demo-knx-linux-menu](./assets/demo-knx-linux-menu.png)
 1. To stop the KNX monitor application just press `CTRL` + `C` and if you want to quit 
 the docker container just enter `exit` in the terminal.
-
+1. If you want to test KNX Monitoring with `*.knxproj` then use the `--volume` argument so that 
+your KNX project files will be visible to container as well:
+    ```
+    podman run --rm -it --net host --volume <your-path-to-knx-projects>:/mnt/host:Z docker.io/pitschr/knx-demo-tty-monitor
+    ```
+    ![demo-knx-linux-knxprojects](./assets/demo-knx-linux-knxprojects.png)
+    
 ##### Option 2: Container without host networking (use bridge) 
 
 There are some limitations when using container, which brings a better isolation, but 
@@ -135,6 +137,9 @@ java -jar knx-demo-tty-monitor.jar
 java -jar knx-demo-tty-monitor.jar --nat
 java -jar knx-demo-tty-monitor.jar --routing
 ```
+
+This option is probably easiest if you are not familiar with container platforms like docker or podman. 
+When you want to use a `*.knxproj` file then just drop it in same folder where `knx-demo-tty-monitor.jar` exists.
 
 ### MacOS
 
