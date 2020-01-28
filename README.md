@@ -112,7 +112,6 @@ your KNX project files will be visible to container as well:
     ```
     podman run --rm -it --net host --volume <your-path-to-knx-projects>:/mnt/host:Z docker.io/pitschr/knx-demo-tty-monitor
     ```
-    ![demo-knx-linux-knxprojects](./assets/demo-knx-linux-knxprojects.png)
     
 ##### Option 2: Container without host networking (use bridge) 
 
