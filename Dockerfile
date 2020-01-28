@@ -18,8 +18,9 @@ RUN apk add ncurses
 RUN ln -s /bin/sh /bin/bash
 # copy the build package
 COPY --from=build /tmp/build/target/knx-demo-tty-monitor.jar /app/knx-demo-tty-monitor.jar
-# the entrypoint script
+# the entrypoint script and make it executable
 COPY docker-entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 # define /app as working directory
 WORKDIR /app
 # Entrypoint 
