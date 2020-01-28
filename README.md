@@ -1,9 +1,9 @@
 # Demo Application: KNX TTY Monitor
 
 This is a demo application to demonstrating how to work / implement a project
-using [knx-link](/knx-link) and the goal is to visualize the KNX monitoring, 
-audit the KNX traffic to a JSON file and write the statistic of all KNX packets 
-in a 5 minutes interval.
+using [knx-link](https://github.com/pitschr/knx-link) and the goal is to visualize 
+the KNX monitoring, audit the KNX traffic to a JSON file and write the statistic 
+of all KNX packets in a 5 minutes interval.
 
 For demo purposes the KNX Monitor only supports terminal that is ANSI escape code
 capable (e.g. Linux, MacOS).
@@ -77,27 +77,43 @@ by ETS the values are displayed in raw data format, see highlighted rows.
 ### Linux
 
 You're lucky! I have created a ready-to-use container image for you. On my machine I am using 
-the [podman](https://podman.io/), but you can also use the docker; in this case just replace the command `podman` with the `docker`
+the [podman](https://podman.io/), but you can also use the docker; in this case just replace 
+the command `podman` with the `docker`.
 
-(Only if necessary) If you are using firewall then either disable it or configure it. 
-Here an example for *firewalld* (via `firewall-cmd`):
+*To allow KNX monitor working you need to grant the KNX traffics through your firewall.*
+Below are two approaches how to enable KNX traffic using firewalld (on CentOS or RHEL).
+If you are using another firewall then please help yourself by consulting the firewall
+documentation.
+
+##### Open port to firewalld directly
 
 ```
-# Create KNX service for firewalld
-firewall-cmd --permanent --new-service=knx
-firewall-cmd --permanent --service=knx --set-description="KNXnet/IP is a part of KNX standard for transmission of KNX telegrams via Ethernet"
-firewall-cmd --permanent --service=knx --set-short=KNX
-firewall-cmd --permanent --service=knx --add-port=3671/udp
+firewall-cmd --add-port=3671/udp
+
 # Ports 40001-40003 are necessary only when you want to communicate without NAT
-firewall-cmd --permanent --service=knx --add-port=40001-40003/udp
+firewall-cmd --add-port=40001-40003/udp
 ```
-then add it to firewalld (remove `--permanent` if you want to add the KNX service temporarily only)
-```
-firewall-cmd --reload
-firewall-cmd --permanent --add-service=knx
-```
+        
+##### Create KNX service and register it to firewalld
+
+1. First step is to create a KNX service for firewalld
+    ```
+    # Create KNX service for firewalld
+    firewall-cmd --permanent --new-service=knx
+    firewall-cmd --permanent --service=knx --set-description="KNXnet/IP is a part of KNX standard for transmission of KNX telegrams via Ethernet"
+    firewall-cmd --permanent --service=knx --set-short=KNX
+    firewall-cmd --permanent --service=knx --add-port=3671/udp
+    # Ports 40001-40003 are necessary only when you want to communicate without NAT
+    firewall-cmd --permanent --service=knx --add-port=40001-40003/udp
+    ```
+1. Second step is to register the KNX service to firewalld zone that is 
+   bound to your network interface or by source.
+    ```
+    firewall-cmd --reload
+    firewall-cmd --permanent --add-service=knx
+    ```
     
-##### Option 1: Container with host networking
+#### Option 1: Container with host networking
 
 1. Pull & run the image using:
     ```
@@ -112,10 +128,10 @@ make your KNX project files visible and accessible to container:
 podman run --rm -it --net host --volume <your-path-to-knx-projects>:/mnt/host:Z docker.io/pitschr/knx-demo-tty-monitor
 ```
     
-##### Option 2: Container without host networking (use bridge) 
+#### Option 2: Container without host networking (use bridge) 
 
 There are some limitations when using container, which brings a better isolation, but 
-also some limitations in e.g. UDP multicasting. With this approach you need to connect
+also some limitations in e.g. UDP multicasting. With bridge approach you need to connect
 the KNX Net/IP device using IP Address and NAT.
 
 1. Pull & run the image using:
@@ -127,30 +143,37 @@ the KNX Net/IP device using IP Address and NAT.
     java -jar knx-demo-tty-monitor.jar --ip 192.168.1.16 --nat
     ```
 
-##### Option 3: Start KNX monitor without container platform
+#### Option 3: Start KNX monitor without container platform
 
-Alternatively, you can also launch the KNX monitor using [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file:
+Alternatively, there is an old-school way available. You can also launch the KNX monitor using 
+[knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file:
 ```
 java -jar knx-demo-tty-monitor.jar
 java -jar knx-demo-tty-monitor.jar --nat
 java -jar knx-demo-tty-monitor.jar --routing
 ```
 
-This option is probably easiest if you are not familiar with container platforms like docker or podman. 
-When you want to use a `*.knxproj` file then just drop it in same folder where `knx-demo-tty-monitor.jar` exists.
+This option is probably easiest if you are not familiar with container platforms. 
+When you want to use a `*.knxproj` file then just drop it in same folder where 
+`knx-demo-tty-monitor.jar` exists.
 
 ### MacOS
 
-On Mac (and Windows) the docker is running on a virtual machine and there is a known 
-limitation for UDP and requires NAT. This means: Auto-discovery, Routing and Tunneling 
-without NAT are not possible at the moment with docker and Mac (and Windows). 
-However, you may the test application with tunneling and NAT only:
+On Mac (and Windows) the container platforms are running on a virtual machine and 
+which brings some technical limitations for UDP multicast packets. This means:
+No auto-discovery, routing and tunneling without NAT.
+ 
+#### Option 1: Mac for Docker version (limited)
+
+You may the test application with tunneling by *IP Address and NAT* only:
 ```
-java -jar knx-demo-tty-monitor.jar --ip <enter-ip-address> --nat
+docker run --rm -it docker.io/pitschr/knx-demo-tty-monitor
 ```
 
-For full capability it is better to execute the KNX monitor using MacOS terminal which 
-gives you the possibility to try out auto-discovery, routing, etc.
+#### Option 2: Direct Java execution (full capability)
+
+On Mac it is better to execute the KNX monitor using MacOS terminal which 
+gives you the full capability using auto-discovery, routing, etc.
 
 1. Download the [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file.
 1. Open your *Terminal* and go to the folder where you saved the `knx-demo-tty-monitor.jar` file
