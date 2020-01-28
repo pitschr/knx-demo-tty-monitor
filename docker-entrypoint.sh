@@ -3,7 +3,7 @@
 # if a host volume is mounted, try to copy KNXPROJ files 
 # to same working directory
 if [ -d "/mnt/host" ]; then 
-	find /mnt/host -name "*.mp4" -type f -mindepth 1 -maxdepth 1 -exec cp {} /app \; 
+	find /mnt/host -iname "*.knxproj" -type f -mindepth 1 -maxdepth 1 -exec cp {} /app \; 
 fi
 
 #
