@@ -105,13 +105,12 @@ firewall-cmd --permanent --add-service=knx
     ```
 1. You should see a menu with several options like, select one:
    ![demo-knx-linux-menu](./assets/demo-knx-linux-menu.png)
-1. To stop the KNX monitor application just press `CTRL` + `C` and if you want to quit 
-the docker container just enter `exit` in the terminal.
-1. If you want to test KNX Monitoring with `*.knxproj` then use the `--volume` argument so that 
-your KNX project files will be visible to container as well:
-    ```
-    podman run --rm -it --net host --volume <your-path-to-knx-projects>:/mnt/host:Z docker.io/pitschr/knx-demo-tty-monitor
-    ```
+
+If you want to test KNX Monitoring with `*.knxproj` then use the `--volume` argument to
+make your KNX project files visible and accessible to container:
+```
+podman run --rm -it --net host --volume <your-path-to-knx-projects>:/mnt/host:Z docker.io/pitschr/knx-demo-tty-monitor
+```
     
 ##### Option 2: Container without host networking (use bridge) 
 
