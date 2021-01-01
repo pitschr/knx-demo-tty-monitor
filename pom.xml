@@ -23,7 +23,7 @@
     <packaging>jar</packaging>
     <groupId>li.pitschmann</groupId>
     <artifactId>knx-demo-tty-monitor</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
     <name>Demo: KNX TTY Monitor</name>
     <description>A KNX demo application for terminal based monitoring based on KNX Link project</description>
     <url>https://github.pitschmann.li</url>
@@ -52,7 +52,7 @@
         <url>https://github.com/pitschr/knx-demo-tty-monitor</url>
         <connection>scm:git:https://github.com/pitschr/knx-demo-tty-monitor</connection>
         <developerConnection>scm:git:https://github.com/pitschr/knx-demo-tty-monitor</developerConnection>
-        <tag>knx-demo-tty-monitor-0.1.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <!-- Properties -->
