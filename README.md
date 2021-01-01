@@ -146,7 +146,7 @@ the KNX Net/IP device using IP Address and NAT.
 #### Option 3: Start KNX monitor without container platform
 
 Alternatively, there is an old-school way available. You can also launch the KNX monitor using 
-[knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file:
+the latest version of `knx-demo-tty-monitor-<version>.jar` file; grab it from the [release page](https://github.com/pitschr/knx-demo-tty-monitor/releases).
 ```
 java -jar knx-demo-tty-monitor.jar
 java -jar knx-demo-tty-monitor.jar --nat
@@ -175,7 +175,7 @@ docker run --rm -it docker.io/pitschr/knx-demo-tty-monitor
 On Mac it is better to execute the KNX monitor using MacOS terminal which 
 gives you the full capability using auto-discovery, routing, etc.
 
-1. Download the [knx-demo-tty-monitor.jar](https://github.com/pitschr/knx-demo-tty-monitor/releases/download/0/knx-demo-tty-monitor.jar) file.
+1. Download the latest `knx-demo-tty-monitor-<version>.jar` file from [releases page](https://github.com/pitschr/knx-demo-tty-monitor/releases)
 1. Open your *Terminal* and go to the folder where you saved the `knx-demo-tty-monitor.jar` file
 1. Launch with e.g.  
     ```
