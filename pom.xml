@@ -14,17 +14,16 @@
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses />.
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!-- Project -->
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <groupId>li.pitschmann</groupId>
     <artifactId>knx-demo-tty-monitor</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>Demo: KNX TTY Monitor</name>
     <description>A KNX demo application for terminal based monitoring based on KNX Link project</description>
     <url>https://github.pitschmann.li</url>
@@ -53,7 +52,7 @@
         <url>https://github.com/pitschr/knx-demo-tty-monitor</url>
         <connection>scm:git:https://github.com/pitschr/knx-demo-tty-monitor</connection>
         <developerConnection>scm:git:https://github.com/pitschr/knx-demo-tty-monitor</developerConnection>
-        <tag>HEAD</tag>
+        <tag>knx-demo-tty-monitor-0.1.0</tag>
     </scm>
 
     <!-- Properties -->
