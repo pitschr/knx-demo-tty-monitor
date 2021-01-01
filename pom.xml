@@ -24,7 +24,7 @@
     <packaging>jar</packaging>
     <groupId>li.pitschmann</groupId>
     <artifactId>knx-demo-tty-monitor</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.0-SNAPSHOT</version>
     <name>Demo: KNX TTY Monitor</name>
     <description>A KNX demo application for terminal based monitoring based on KNX Link project</description>
     <url>https://github.pitschmann.li</url>
@@ -37,6 +37,24 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <!-- Developers -->
+    <developers>
+        <developer>
+            <name>Christoph Pitschmann</name>
+            <email>github@pitschmann.li</email>
+            <organization>Pitschmann</organization>
+            <organizationUrl>https://github.pitschmann.li</organizationUrl>
+        </developer>
+    </developers>
+
+    <!-- Source Control Management -->
+    <scm>
+        <url>https://github.com/pitschr/knx-demo-tty-monitor</url>
+        <connection>scm:git:https://github.com/pitschr/knx-demo-tty-monitor</connection>
+        <developerConnection>scm:git:https://github.com/pitschr/knx-demo-tty-monitor</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <!-- Properties -->
     <properties>
