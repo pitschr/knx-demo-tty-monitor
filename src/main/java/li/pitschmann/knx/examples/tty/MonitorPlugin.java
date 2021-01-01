@@ -321,7 +321,7 @@ public final class MonitorPlugin implements ObserverPlugin, ExtensionPlugin {
 
             // get data point type
             XmlGroupAddress xmlGroupAddress;
-            DataPointType<?> dpt = null;
+            DataPointType dpt = null;
             if (xmlProject != null && destinationAddress instanceof GroupAddress) {
                 xmlGroupAddress = xmlProject.getGroupAddress((GroupAddress) destinationAddress);
                 if (xmlGroupAddress != null) {
@@ -340,10 +340,10 @@ public final class MonitorPlugin implements ObserverPlugin, ExtensionPlugin {
             // value of data
             final String dptValueString;
             if (dpt != null) {
-                final var dptValue = dpt.of(cemi.getApciData());
+                final var dptValue = dpt.of(cemi.getData());
                 dptValueString = String.format("%s %s", dptValue.toText(), dpt.getUnit());
             } else {
-                dptValueString = ByteFormatter.formatHexAsString(cemi.getApciData());
+                dptValueString = ByteFormatter.formatHexAsString(cemi.getData());
             }
             sb.append(dptValueString);
 
