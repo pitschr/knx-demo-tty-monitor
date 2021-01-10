@@ -97,9 +97,9 @@ public class Main {
                 // set the path of KNX project file
                 .setting(CoreConfigs.PROJECT_PATH, projectPath)
                 // register plugins
-                .plugin(FileAuditPlugin.class) //
-                .plugin(MonitorPlugin.class) //
-                .plugin(FileStatisticPlugin.class)
+                .plugin(new FileAuditPlugin()) //
+                .plugin(new MonitorPlugin()) //
+                .plugin(new FileStatisticPlugin())
                 // hardcoded ports -> useful for docker
                 .setting(CoreConfigs.Description.PORT, 40001) //
                 .setting(CoreConfigs.Control.PORT, 40002) //
