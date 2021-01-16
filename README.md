@@ -26,7 +26,7 @@ It includes three plugins:
 | ---- | ------------- | ----------- |
 | `-t <number>` <br> `--time <number>` | `3600` (=1 hour) | The time in seconds how the KNX monitor should run. |
 | `-p <path>` <br> `--project <path>` | _latest *.knxproj in the folder_ | The path to _*.knxproj file_ that is created by the ETS to encode the values in correct data point types. In case there are more than one _*.knxproj_ in the working directory, the most recent _*.knxproj file_ (based on timestamp) will be taken. <br><br> If no _*.knxproj file_ is provided then all values are displayed in raw bytes |
-| `-g` <br> `--generate-fake-data` | `false` | Indicates if the fake data should be generated for demo purposes |
+| `-g` <br> `--generate-fake-data` | `false` | Indicates if the fake data should be generated for demo purposes. If `true` then every second a fake data will be generated. This is rather for development purposes to check the monitor layout. |
 
 #### Examples
 ```shell script
@@ -112,6 +112,9 @@ firewall-cmd --add-port=40001-40003/udp
     firewall-cmd --reload
     firewall-cmd --permanent --add-service=knx
     ```
+
+Note: The firewall configuration file of the newly created 'knx' service can be found at `/etc/firewalld/knx.xml`.
+Detailed information about the 'knx' firewalld service can be gathered using `firewall-cmd --info-service=knx`.
     
 #### Option 1: Container with host networking
 
@@ -123,9 +126,9 @@ firewall-cmd --add-port=40001-40003/udp
    ![demo-knx-linux-menu](./assets/demo-knx-linux-menu.png)
 
 If you want to test KNX Monitoring with `*.knxproj` then use the `--volume` argument to
-make your KNX project files visible and accessible to container:
+make your KNX project files visible and accessible to container like:
 ```
-podman run --rm -it --net host --volume <your-path-to-knx-projects>:/mnt/host:Z docker.io/pitschr/knx-demo-tty-monitor
+podman run --rm -it --net host --volume /home/user/myfolder:/mnt/host:Z docker.io/pitschr/knx-demo-tty-monitor
 ```
     
 #### Option 2: Container without host networking (use bridge) 
