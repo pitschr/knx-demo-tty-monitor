@@ -1,5 +1,6 @@
 package li.pitschmann.knx.examples.tty;
 
+import li.pitschmann.knx.core.CEMIAware;
 import li.pitschmann.knx.core.address.GroupAddress;
 import li.pitschmann.knx.core.address.IndividualAddress;
 import li.pitschmann.knx.core.annotations.Nullable;
@@ -195,9 +196,8 @@ public final class MonitorPlugin implements ObserverPlugin, ExtensionPlugin {
 
     @Override
     public void onIncomingBody(final Body item) {
-        if (item instanceof TunnelingRequestBody
-                || item instanceof RoutingIndicationBody) {
-            printLineInTable(item);
+        if (item instanceof CEMIAware) {
+            printLineInTable(((CEMIAware)item).getCEMI());
         }
     }
 
@@ -286,24 +286,15 @@ public final class MonitorPlugin implements ObserverPlugin, ExtensionPlugin {
     /**
      * Print line in table
      *
-     * @param body the body that should be printed to table
+     * @param cemi the {@link CEMI} instance that should be printed to table
      */
-    private void printLineInTable(final Body body) {
+    private void printLineInTable(final CEMI cemi) {
         try {
             final var sb = new StringBuilder();
             sb.append(String.format("%10s", numberOfIncomingBodies.incrementAndGet()))
                     .append(" | ")
                     .append(String.format("%19s", DATE_TIME_FORMATTER.format(LocalDateTime.now())))
                     .append(" | ");
-
-            final CEMI cemi;
-            if (body instanceof TunnelingRequestBody) {
-                cemi = ((TunnelingRequestBody) body).getCEMI();
-            } else if (body instanceof RoutingIndicationBody) {
-                cemi = ((RoutingIndicationBody) body).getCEMI();
-            } else {
-                throw new AssertionError();
-            }
 
             final var sourceAddress = cemi.getSourceAddress();
             final var destinationAddress = cemi.getDestinationAddress();
@@ -316,7 +307,7 @@ public final class MonitorPlugin implements ObserverPlugin, ExtensionPlugin {
             if (xmlProject != null && destinationAddress instanceof GroupAddress) {
                 sb.append(String.format("%9s", xmlProject.getGroupAddressStyle().toString((GroupAddress) destinationAddress)));
             } else {
-                sb.append(String.format("%9s", destinationAddress.getRawDataAsHexString()));
+                sb.append(String.format("%9s", ByteFormatter.formatHexAsString(destinationAddress.toByteArray())));
             }
 
             // get data point type
@@ -412,9 +403,7 @@ public final class MonitorPlugin implements ObserverPlugin, ExtensionPlugin {
                         APCI.GROUP_VALUE_WRITE,
                         DPT8.VALUE_2_OCTET_COUNT.of(inc * 127)
                 );
-                final Body body = TunnelingRequestBody.of(1, inc, cemi);
-
-                printLineInTable(body);
+                printLineInTable(cemi);
             } while (Sleeper.milliseconds(generateFakeDataInterval));
         }
     }

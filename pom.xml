@@ -26,7 +26,6 @@
     <version>0.2.1-SNAPSHOT</version>
     <name>Demo: KNX TTY Monitor</name>
     <description>A KNX demo application for terminal based monitoring based on KNX Link project</description>
-    <url>https://github.pitschmann.li</url>
 
     <!-- Licenses -->
     <licenses>
@@ -42,8 +41,6 @@
         <developer>
             <name>Christoph Pitschmann</name>
             <email>github@pitschmann.li</email>
-            <organization>Pitschmann</organization>
-            <organizationUrl>https://github.pitschmann.li</organizationUrl>
         </developer>
     </developers>
 
@@ -64,7 +61,9 @@
         <version.maven-assembly-plugin>3.2.0</version.maven-assembly-plugin> <!-- Apache 2.0 -->
         <version.maven-compiler-plugin>3.8.1</version.maven-compiler-plugin> <!-- Apache 2.0 -->
         <!-- Dependency Versions and Licenses -->
-        <version.knx-core>0.2.0</version.knx-core> <!-- GPL 3.0 -->
+        <version.knx-core>0.3.0</version.knx-core> <!-- GPL 3.0 -->
+        <version.knx-core-plugin-audit>0.3.0</version.knx-core-plugin-audit> <!-- GPL 3.0 -->
+        <version.knx-core-plugin-statistic>0.3.0</version.knx-core-plugin-statistic> <!-- GPL 3.0 -->
         <version.logback-classic>1.2.3</version.logback-classic> <!-- EPL 1.0, LGPL 2.1 -->
     </properties>
 
@@ -78,12 +77,12 @@
         <dependency>
             <groupId>li.pitschmann</groupId>
             <artifactId>knx-core-plugin-audit</artifactId>
-            <version>${version.knx-core}</version>
+            <version>${version.knx-core-plugin-audit}</version>
         </dependency>
         <dependency>
             <groupId>li.pitschmann</groupId>
             <artifactId>knx-core-plugin-statistic</artifactId>
-            <version>${version.knx-core}</version>
+            <version>${version.knx-core-plugin-statistic}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
