@@ -1,7 +1,7 @@
 # Demo Application: KNX TTY Monitor
 
 This is a demo application to demonstrating how to work / implement a project
-using [knx-link](https://github.com/pitschr/knx-link) and the goal is to visualize 
+using [knx-core](https://github.com/pitschr/knx-core) and the goal is to visualize 
 the KNX monitoring, audit the KNX traffic to a JSON file and write the statistic 
 of all KNX packets in a 5 minutes interval.
 
@@ -11,9 +11,9 @@ capable (e.g. Linux, MacOS).
 It includes three plugins:
 * KNX Monitoring
   * Terminal visualization of KNX traffic (similar to the _Group Monitor_ in ETS from KNX Association)
-* KNX File Auditing (re-used: [knx-core-plugin-audit](https://github.com/pitschr/knx-link/tree/master/knx-core-plugins/audit))
+* KNX File Auditing (re-used: [knx-core-plugin-audit](https://github.com/pitschr/knx-core-plugins/tree/main/audit))
   * Auditing the KNX packets in JSON structure that can be used for further analysis 
-* KNX Statistic (re-used: [knx-core-plugin-statistic](https://github.com/pitschr/knx-link/tree/master/knx-core-plugins/statistic))
+* KNX Statistic (re-used: [knx-core-plugin-statistic](https://github.com/pitschr/knx-core-plugins/tree/main/statistic))
   * Textual format of statistic to see how many KNX packets and which type of KNX packets were sent/received 
 
 ## How to use it?
